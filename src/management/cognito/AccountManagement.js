@@ -25,32 +25,33 @@ const AccountManagement = observer(class AccountManagement extends Component {
   }
 
   login(email, password) {
-        const userPool = new CognitoUserPool({
-            UserPoolId: this.state.USER_POOL_ID,
-            ClientId: this.state.APP_CLIENT_ID
-        });
+      const userPool = new CognitoUserPool({
+          UserPoolId: this.state.USER_POOL_ID,
+          ClientId: this.state.APP_CLIENT_ID
+      });
 
-        const user = new CognitoUser({ Username: email, Pool: userPool });
-        const authenticationData = { Username: email, Password: password };
-        const authenticationDetails = new AuthenticationDetails(authenticationData);
+      const user = new CognitoUser({ Username: email, Pool: userPool });
+      const authenticationData = { Username: email, Password: password };
+      const authenticationDetails = new AuthenticationDetails(authenticationData);
 
-        return new Promise((resolve, reject) => {
-            user.authenticateUser(authenticationDetails, {
-                onSuccess: result => {
-                    userStore.user = user;
-                    userStore.email = email;
-                },
-                onFailure: err => reject(err),
-                mfaRequired: function(codeDeliveryResults) {
-                    alert("MFA is required");
-                    reject("MFA is required");
-                },
-                newPasswordRequired: function(userAttributes, requiredAttributes) {
-                    alert("New password required");
-                    reject("New password required");
-                }
-            })
-        });
+      return new Promise((resolve, reject) => {
+          user.authenticateUser(authenticationDetails, {
+              onSuccess: result => {
+                  userStore.user = user;
+                  userStore.email = email;
+                  resolve(user)
+              },
+              onFailure: err => reject(err),
+              mfaRequired: function(codeDeliveryResults) {
+                  alert("MFA is required");
+                  reject("MFA is required");
+              },
+              newPasswordRequired: function(userAttributes, requiredAttributes) {
+                  alert("New password required");
+                  reject("New password required");
+              }
+          })
+      });
     }
 
     signup(email, password, phone) {

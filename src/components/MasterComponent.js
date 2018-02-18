@@ -33,7 +33,6 @@ const MasterComponent = observer(class MasterComponent extends Component {
                   <Route exact path="/login" render={routeProps => <LoginComponent {...routeProps} />} />
                   <Route exact path="/register" render={routeProps => <CreateAccountComponent {...routeProps} />} />
                   <Route exact path="/register/personal-info" render={routeProps => <CollectPersonalInfoComponent {...routeProps} />} />
-                  <Route exact path="/register/business-info" render={routeProps => <CollectBusinessInfoComponent {...routeProps} />} />
                   <Route exact path="/register/invitation" render={routeProps => <InvitationComponent {...routeProps} />} />
                   <Route exact path="/register/verify-account" render={routeProps => <VerifyAccountComponent {...routeProps} />} />
                   <Route path="/merchant" render={routeProps => <DashboardComponent {...routeProps} />} />

@@ -30,6 +30,7 @@ const LoginComponent = observer(class LoginComponent extends Component {
     }
 
   handleSignInOnClick = async event => {
+    alert('here')
     if(this.state.email === undefined || this.state.email.length < 5) {
       alert('Not a valid email');
       return;
@@ -45,6 +46,7 @@ const LoginComponent = observer(class LoginComponent extends Component {
           userStore.merchant_uuid = find(userStore.attributes, ['name','custom:merchant_uuid'])
 
           const name = find(userStore.attributes, ['name','given_name'])
+          console.log('here', name)
           if(!userStore.merchant_uuid) {
             this.props.history.push('/register/invitation')
           } else if(!name) {

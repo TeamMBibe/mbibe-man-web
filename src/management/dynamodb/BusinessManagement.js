@@ -123,8 +123,8 @@ const BusinessManagement = observer(class BusinessManagement extends Component {
 
   getBusiness(uuid) {
         var params = {
-            TableName : "BusinessTable",
-            KeyConditionExpression: "BusinessUUID = :n",
+            TableName : "business-table",
+            KeyConditionExpression: "business_uuid = :n",
             ExpressionAttributeValues: {
                 ":n": { S:uuid }
             }
@@ -144,6 +144,25 @@ const BusinessManagement = observer(class BusinessManagement extends Component {
         });
     }
 
+    getBusinessMembers(uuid) {
+      var params = {
+          TableName : uuid,
+          AttributesToGet: ["username"]
+      };
+
+      return new Promise((resolve, reject) => {
+          this.ddb.scan(params, function(err, data) {
+              if (err) {
+                  console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+                  reject(err);
+              } else {
+                const accounts = data.Items.map(item => item.username.S)
+                resolve(accounts);
+              }
+          })
+      });
+    }
+
     getMerchantBusinesses() {
       var params = {
           TableName : "business-table",
@@ -161,7 +180,7 @@ const BusinessManagement = observer(class BusinessManagement extends Component {
               }
           })
       });
-      }
+    }
 
     getMemberProfileForBusiness(uuid, username) {
           var params = {
@@ -239,18 +258,18 @@ const BusinessManagement = observer(class BusinessManagement extends Component {
         var params = {
             "TableName" : uuid,
             "Item" : {
-              'Username' : {'S' : username },
-              'LastVisit' : { 'S' : date} ,
-              'MemberSince' : { 'S' : date},
-              'OuncesByTapToday' : {'M': {}},
-              "OuncesPouredEver": {"N": "0"},
-              "OuncesPouredToday": {"N": "0"},
-              "Points": {"N": "0"},
-              'Rewards' : {"L" : []},
-              "VisitsThisMonth": {"N": "1"},
-              "VisitsThisWeek": {"N": "1"},
-              "VisitsThisYear": {"N": "1"},
-              "VisitsTotal": {"N": "1"}
+              'username' : {'S' : username },
+              'last_visit' : { 'S' : date} ,
+              'member_since' : { 'S' : date},
+              'ounces_by_tap_today' : {'M': {}},
+              "ounces_poured_ever": {"N": "0"},
+              "ounces_poured_today": {"N": "0"},
+              "points": {"N": "0"},
+              'rewards' : {"L" : []},
+              "visits_this_month": {"N": "1"},
+              "visits_this_week": {"N": "1"},
+              "visits_this_year": {"N": "1"},
+              "visits_total": {"N": "1"}
             }
         };
 

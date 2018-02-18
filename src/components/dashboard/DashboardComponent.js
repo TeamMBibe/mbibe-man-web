@@ -3,12 +3,15 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { observer } from "mobx-react";
 import { withRouter, Redirect } from 'react-router'
 import HeaderComponent from './HeaderComponent'
+import MerchantViewComponent from './MerchantViewComponent'
 import BusinessViewComponent from './BusinessViewComponent'
+import MembersViewComponent from './MembersViewComponent'
 import accountManagement from '../../management/cognito/AccountManagement'
 import userStore from '../../management/data_stores/UserStore'
 import businessManagement from '../../management/dynamodb/BusinessManagement'
 import LoadingCircleComponent from '../util/LoadingCircleComponent'
 import find from 'lodash/find'
+import GenericNotFound from '../util/GenericNotFound'
 
 
 const DashboardComponent = observer(class DashboardComponent extends Component {
@@ -41,7 +44,10 @@ const DashboardComponent = observer(class DashboardComponent extends Component {
               }
               {userStore.merchant_uuid &&
                 <Switch>
-                  <Route exact path="/merchant" render={routeProps => <BusinessViewComponent {...routeProps} />} />
+                  <Route exact path="/merchant" render={routeProps => <MerchantViewComponent {...routeProps} />} />
+                  <Route exact path="/merchant/business-view" render={routeProps => <BusinessViewComponent {...routeProps} />} />
+                  <Route exact path="/merchant/business-view/members" render={routeProps => <MembersViewComponent {...routeProps} />} />
+                  <Route path="*" render={routeProps => <GenericNotFound {...routeProps} />} />
                 </Switch>
               }
             </div>
