@@ -8,6 +8,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import AddMemberComponent from '../actions/AddMemberComponent'
 import LoadingCircleComponent from '../util/LoadingCircleComponent'
+import keys from 'lodash/keys'
+import values from 'lodash/values'
 import {
   Table,
   TableBody,
@@ -23,25 +25,8 @@ const MembersViewComponent = observer(class MembersViewComponent extends Compone
   constructor(props) {
     super(props)
     this.state = {
-      showAddBox:false,
-    }
-  }
-
-  async componentWillMount() {
-    if(!this.props.location.business_uuid) {
-      this.props.history.push('/merchant')
-    } else if(!this.props.location.business_info) {
-      this.props.history.push({
-        pathname: '/merchant/business-view',
-        search: '?uuid=' + this.props.location.business_uuid
-      })
-    } else {
-      let members = await businessManagement.getBusinessMembers(this.props.location.business_uuid)
-      this.setState({
-        businessUuid: this.props.location.business_uuid,
-        businessMembers: members,
-        businessInfo: this.props.location.business_info
-      })
+      businessInfo:this.props.businessInfo,
+      businessMembers: this.props.businessMembers
     }
   }
 
@@ -50,19 +35,23 @@ const MembersViewComponent = observer(class MembersViewComponent extends Compone
   }
 
   handleClose = async event => {
-    let members = await businessManagement.getBusinessMembers(this.state.businessUuid)
+    let members = await businessManagement.getBusinessMembers(this.state.businessInfo.business_uuid.S)
     this.setState({businessMembers: members, showAddBox:false})
   }
 
   renderMembers = () => {
-    console.log('mems', this.state.businessMembers)
     return this.state.businessMembers.map(item => {
-      return(
-        <TableRow>
-          <TableRowColumn>{item}</TableRowColumn>
-          <TableRowColumn>John Smith</TableRowColumn>
-          <TableRowColumn>Employed</TableRowColumn>
-        </TableRow>
+      return (
+        <TableRow><TableRowColumn>{item.username.S}</TableRowColumn></TableRow>
+      )
+    })
+  }
+
+  renderHeaders = () => {
+    if(this.state.businessMembers.length <= 0) return
+    return keys(this.state.businessMembers[0]).map( item => {
+      return (
+        <TableHeaderColumn>{item}</TableHeaderColumn>
       )
     })
   }
@@ -103,9 +92,7 @@ const MembersViewComponent = observer(class MembersViewComponent extends Compone
                       <Table>
                         <TableHeader>
                           <TableRow>
-                            <TableHeaderColumn>Email</TableHeaderColumn>
-                            <TableHeaderColumn>Name</TableHeaderColumn>
-                            <TableHeaderColumn>Status</TableHeaderColumn>
+                            <TableHeaderColumn>Username</TableHeaderColumn>
                           </TableRow>
                         </TableHeader>
                         <TableBody>

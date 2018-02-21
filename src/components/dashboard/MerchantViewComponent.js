@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { observer } from "mobx-react";
 import { withRouter, Redirect } from 'react-router'
 import HeaderComponent from './HeaderComponent'
+import userStore from '../../management/data_stores/UserStore'
 import businessManagement from '../../management/dynamodb/BusinessManagement'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -39,9 +40,9 @@ const MerchantViewComponent = observer(class MerchantViewComponent extends Compo
   }
 
   handleBusinessClick = (business_uuid, business_name) => {
+    userStore.selected_business_uuid = business_uuid
     this.props.history.push({
       pathname: '/merchant/business-view',
-      search: '?uuid=' + business_uuid,
       business_name
     })
   }

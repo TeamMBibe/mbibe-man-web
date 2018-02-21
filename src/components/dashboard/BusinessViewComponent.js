@@ -20,98 +20,102 @@ const BusinessViewComponent = observer(class BusinessViewComponent extends Compo
   constructor(props) {
     super(props)
     this.state = {
-      loadingTitle:this.props.location.business_name,
-      businessInfo: null,
-      businessMembers: null
-    }
-
-    if(this.props.location.search) {
-      this.business_uuid = this.props.location.search.replace('?uuid=','')
-    } else {
-      this.props.history.push('/merchant')
-      return;
-    }
-  }
-
-  async componentWillMount() {
-    try {
-      let info = await businessManagement.getBusiness(this.business_uuid)
-      let members = await businessManagement.getBusinessMembers(this.business_uuid)
-      console.log('info', info)
-      console.log('members', members)
-      this.setState({businessInfo:info, businessMembers:members})
-    } catch(err) {
-      alert('The requested business does not exist');
-      this.props.history.push('/merchant')
+      businessInfo:this.props.businessInfo,
+      businessMembers: this.props.businessMembers
     }
   }
 
   handleManageMembersOnClick = () => {
     this.props.history.push({
-      pathname: '/merchant/business-view/members',
-      business_uuid: this.business_uuid,
-      business_members: this.state.businessMembers,
-      business_info: this.state.businessInfo
+      pathname: '/merchant/business-view/members'
     })
+  }
+
+  
+
+  renderBusinessInfoPaper = () => {
+    console.log(this.state.businessInfo)
+    return (
+      <Paper style={styles.paperStyle} zDepth={2}>
+        <div style={{width:'100%', backgroundColor:'#373536', height:10}}></div>
+        <div style={{height:'auto', width:'100%', backgroundColor:'#DCDCDC', paddingBottom:20}}>
+          <div
+            style={{height:'auto', width:'auto', color:'#FFFFFF', fontSize:100, cursor:'pointer', textAlign:'center', backgroundColor:'#373536', borderRadius:200, padding:30, marginTop:20}}
+            className="glyphicon glyphicon-info-sign"
+            onClick={this.handleClose}>
+          </div>
+          <div style={{fontSize:26, paddingTop:10, textAlign:'center', color:'#373536'}}>Information</div>
+        </div>
+        <div style={{width:'100%', height:80}}>
+          <div style={{fontSize:14, paddingTop:10, marginBottom:0, textAlign:'center', color:'#373536'}}>Address: {this.state.businessInfo.address.S}</div>
+          <div style={{fontSize:14, paddingTop:0, marginBottom:10, textAlign:'center', color:'#373536'}}>Website: {this.state.businessInfo.website.S}</div>
+        </div>
+        <RaisedButton
+            label="View"
+            style={{width:'50%', borderRadius:'100px'}}
+            onClick={this.handleManageMembersOnClick}
+            backgroundColor="#FFAD0A"/>
+      </Paper>
+    )
+  }
+
+  renderMemberPaper = () => {
+    return (
+      <Paper style={styles.paperStyle} zDepth={2}>
+        <div style={{width:'100%', backgroundColor:'#373536', height:10}}></div>
+          <div style={{height:'auto', width:'100%', backgroundColor:'#DCDCDC', paddingBottom:20}}>
+            <div
+              style={{height:'auto', width:'auto', color:'#FFFFFF', fontSize:100, cursor:'pointer', textAlign:'center', backgroundColor:'#373536', borderRadius:200, padding:30, marginTop:20}}
+              className="glyphicon glyphicon-user"
+              onClick={this.handleBusinessInformationClick}>
+            </div>
+          <div style={{fontSize:26, paddingTop:10, textAlign:'center', color:'#373536'}}>Members</div>
+        </div>
+        <div style={{width:'100%', height:80}}>
+          <div style={{fontSize:18, paddingTop:10, marginBottom:30, textAlign:'center', color:'#373536'}}>Active: {this.state.businessMembers.length}</div>
+        </div>
+        <RaisedButton
+            label="Manage"
+            style={{width:'50%', borderRadius:'100px'}}
+            onClick={this.handleManageMembersOnClick}
+            backgroundColor="#FFAD0A"/>
+      </Paper>
+    )
   }
 
     render() {
         return (
             <div>
               <MuiThemeProvider>
+
                 {!this.state.businessInfo &&
                   <LoadingCircleComponent message={this.state.loadingTitle?"Loading " + this.state.loadingTitle : "Loading Business"} />
                 }
 
                 {this.state.businessInfo &&
-                  <div className="col-md-12">
-                    <div className="col-md-4">
-                      <Paper style={styles.paperStyle} zDepth={2}>
-                        <div style={{width:'100%', backgroundColor:'#373536', height:10}}></div>
-                        <div style={{height:'auto', width:'100%', backgroundColor:'#DCDCDC', paddingBottom:20}}>
-                          <div
-                            style={{height:'auto', width:'auto', color:'#FFFFFF', fontSize:100, cursor:'pointer', textAlign:'center', backgroundColor:'#373536', borderRadius:200, padding:30, marginTop:20}}
-                            className="glyphicon glyphicon-info-sign"
-                            onClick={this.handleClose}>
-                          </div>
-                          <div style={{fontSize:26, paddingTop:10, textAlign:'center', color:'#373536'}}>Information</div>
-                        </div>
-                      </Paper>
-                    </div>
-                    <div className="col-md-4 ">
-                      <Paper style={styles.paperStyle} zDepth={2}>
+
+                    <div className="col-md-12">
+                      <div className="col-md-4">
+                        {this.renderBusinessInfoPaper()}
+                      </div>
+                      <div className="col-md-4 ">
+                        {this.renderMemberPaper()}
+                      </div>
+                      <div className="col-md-4 ">
+                        <Paper style={styles.paperStyle} zDepth={2}>
                         <div style={{width:'100%', backgroundColor:'#373536', height:10}}></div>
                           <div style={{height:'auto', width:'100%', backgroundColor:'#DCDCDC', paddingBottom:20}}>
                             <div
                               style={{height:'auto', width:'auto', color:'#FFFFFF', fontSize:100, cursor:'pointer', textAlign:'center', backgroundColor:'#373536', borderRadius:200, padding:30, marginTop:20}}
-                              className="glyphicon glyphicon-user"
+                              className="glyphicon glyphicon-home"
                               onClick={this.handleClose}>
                             </div>
-                          <div style={{fontSize:26, paddingTop:10, textAlign:'center', color:'#373536'}}>Members</div>
+                          <div style={{fontSize:26, paddingTop:10, textAlign:'center', color:'#373536'}}>My Business</div>
                         </div>
-                        <div style={{fontSize:18, paddingTop:10, marginBottom:30, textAlign:'center', color:'#373536'}}>Active: {this.state.businessMembers.length}</div>
-                        <RaisedButton
-                            label="Manage Members"
-                            style={{width:'50%', borderRadius:'100px'}}
-                            onClick={this.handleManageMembersOnClick}
-                            backgroundColor="#FFAD0A"/>
-                      </Paper>
-                    </div>
-                    <div className="col-md-4 ">
-                      <Paper style={styles.paperStyle} zDepth={2}>
-                      <div style={{width:'100%', backgroundColor:'#373536', height:10}}></div>
-                        <div style={{height:'auto', width:'100%', backgroundColor:'#DCDCDC', paddingBottom:20}}>
-                          <div
-                            style={{height:'auto', width:'auto', color:'#FFFFFF', fontSize:100, cursor:'pointer', textAlign:'center', backgroundColor:'#373536', borderRadius:200, padding:30, marginTop:20}}
-                            className="glyphicon glyphicon-home"
-                            onClick={this.handleClose}>
-                          </div>
-                        <div style={{fontSize:26, paddingTop:10, textAlign:'center', color:'#373536'}}>My Business</div>
+                        </Paper>
                       </div>
-                      </Paper>
-                    </div>
 
-                  </div>
+                    </div>
                 }
               </MuiThemeProvider>
             </div>

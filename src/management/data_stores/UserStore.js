@@ -8,6 +8,8 @@ class UserStore {
         extendObservable(this, {
             email: null,
             user: null,
+
+            selected_business_uuid:null,
             merchant_uuid:null,
             attributes:null,
 

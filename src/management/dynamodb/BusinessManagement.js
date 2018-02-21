@@ -146,8 +146,7 @@ const BusinessManagement = observer(class BusinessManagement extends Component {
 
     getBusinessMembers(uuid) {
       var params = {
-          TableName : uuid,
-          AttributesToGet: ["username"]
+          TableName : uuid
       };
 
       return new Promise((resolve, reject) => {
@@ -156,7 +155,7 @@ const BusinessManagement = observer(class BusinessManagement extends Component {
                   console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                   reject(err);
               } else {
-                const accounts = data.Items.map(item => item.username.S)
+                const accounts = data.Items;
                 resolve(accounts);
               }
           })
