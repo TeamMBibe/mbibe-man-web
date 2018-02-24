@@ -29,6 +29,10 @@ const LoginComponent = observer(class LoginComponent extends Component {
         });
     }
 
+  handleCreateButtonOnClick = async event => {
+    this.props.history.push('/register')
+  }
+
   handleSignInOnClick = async event => {
     alert('here')
     if(this.state.email === undefined || this.state.email.length < 5) {
@@ -66,7 +70,7 @@ const LoginComponent = observer(class LoginComponent extends Component {
         return (
           <div style={styles.pageStyle}>
             <MuiThemeProvider>
-              <div className="col-md-6 col-md-offset-3 center" style={{marginTop:'10%'}}>
+              <div className="col-md-6 col-md-offset-3 center" style={{marginTop:'100px'}}>
                 <img src={mainLogo} className="center" style={{maxHeight:100, display:'block', width:'auto' }}/>
               </div>
 
@@ -100,7 +104,7 @@ const LoginComponent = observer(class LoginComponent extends Component {
                       </div>
 
                       <div className="row" style={{marginTop:'10px'}}>
-                          <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1"  style={{padding:0}}>
+                          <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1"  style={{padding:0, marginTop:'10px'}}>
                               <RaisedButton
                                   label="Sign In"
                                   buttonStyle={styles.loginButtonStyle}

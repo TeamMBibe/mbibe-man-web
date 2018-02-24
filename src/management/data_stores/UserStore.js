@@ -10,6 +10,9 @@ class UserStore {
             user: null,
 
             selected_business_uuid:null,
+            selected_business_info:null,
+            selected_business_members:null,
+
             merchant_uuid:null,
             attributes:null,
 

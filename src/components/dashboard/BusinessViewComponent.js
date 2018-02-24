@@ -31,34 +31,6 @@ const BusinessViewComponent = observer(class BusinessViewComponent extends Compo
     })
   }
 
-  
-
-  renderBusinessInfoPaper = () => {
-    console.log(this.state.businessInfo)
-    return (
-      <Paper style={styles.paperStyle} zDepth={2}>
-        <div style={{width:'100%', backgroundColor:'#373536', height:10}}></div>
-        <div style={{height:'auto', width:'100%', backgroundColor:'#DCDCDC', paddingBottom:20}}>
-          <div
-            style={{height:'auto', width:'auto', color:'#FFFFFF', fontSize:100, cursor:'pointer', textAlign:'center', backgroundColor:'#373536', borderRadius:200, padding:30, marginTop:20}}
-            className="glyphicon glyphicon-info-sign"
-            onClick={this.handleClose}>
-          </div>
-          <div style={{fontSize:26, paddingTop:10, textAlign:'center', color:'#373536'}}>Information</div>
-        </div>
-        <div style={{width:'100%', height:80}}>
-          <div style={{fontSize:14, paddingTop:10, marginBottom:0, textAlign:'center', color:'#373536'}}>Address: {this.state.businessInfo.address.S}</div>
-          <div style={{fontSize:14, paddingTop:0, marginBottom:10, textAlign:'center', color:'#373536'}}>Website: {this.state.businessInfo.website.S}</div>
-        </div>
-        <RaisedButton
-            label="View"
-            style={{width:'50%', borderRadius:'100px'}}
-            onClick={this.handleManageMembersOnClick}
-            backgroundColor="#FFAD0A"/>
-      </Paper>
-    )
-  }
-
   renderMemberPaper = () => {
     return (
       <Paper style={styles.paperStyle} zDepth={2}>
@@ -95,9 +67,6 @@ const BusinessViewComponent = observer(class BusinessViewComponent extends Compo
                 {this.state.businessInfo &&
 
                     <div className="col-md-12">
-                      <div className="col-md-4">
-                        {this.renderBusinessInfoPaper()}
-                      </div>
                       <div className="col-md-4 ">
                         {this.renderMemberPaper()}
                       </div>
@@ -113,6 +82,9 @@ const BusinessViewComponent = observer(class BusinessViewComponent extends Compo
                           <div style={{fontSize:26, paddingTop:10, textAlign:'center', color:'#373536'}}>My Business</div>
                         </div>
                         </Paper>
+                      </div>
+                      <div className="col-md-4 ">
+
                       </div>
 
                     </div>

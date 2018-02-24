@@ -56,7 +56,7 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
     return (
       <div style={styles.pageStyle}>
         <MuiThemeProvider>
-          <div className="col-md-6 col-md-offset-3 center" style={{marginTop:'10%'}}>
+          <div className="col-md-6 col-md-offset-3 center" style={{marginTop:'100px'}}>
             <img src={mainLogo} className="center" style={{maxHeight:100, display:'block', width:'auto' }}/>
           </div>
 

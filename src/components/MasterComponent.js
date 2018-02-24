@@ -29,7 +29,7 @@ const MasterComponent = observer(class MasterComponent extends Component {
         return (
             <div>
                 <Switch>
-                  <Route exact path="/" render={routeProps => <HomeComponent {...routeProps} />} />
+                  <Route exact path="/" render={routeProps => <LoginComponent {...routeProps} />} />
                   <Route exact path="/login" render={routeProps => <LoginComponent {...routeProps} />} />
                   <Route exact path="/register" render={routeProps => <CreateAccountComponent {...routeProps} />} />
                   <Route exact path="/register/personal-info" render={routeProps => <CollectPersonalInfoComponent {...routeProps} />} />
