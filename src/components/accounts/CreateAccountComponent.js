@@ -44,7 +44,7 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
       event.preventDefault();
       try {
           await accountManagement.signup(this.state.email, this.state.password, this.state.phone)
-          this.props.history.push('/verify-account')
+          this.props.history.push('/register/verify-account')
       } catch (e) {
           alert(e);
       }

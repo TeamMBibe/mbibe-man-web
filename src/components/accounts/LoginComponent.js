@@ -34,7 +34,6 @@ const LoginComponent = observer(class LoginComponent extends Component {
   }
 
   handleSignInOnClick = async event => {
-    alert('here')
     if(this.state.email === undefined || this.state.email.length < 5) {
       alert('Not a valid email');
       return;
