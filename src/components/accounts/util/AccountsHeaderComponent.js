@@ -34,7 +34,7 @@ const styles = {
   }
 }
 
-export default class HomeHeaderComponent extends Component {
+export default class AccountsHeaderComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -78,6 +78,10 @@ export default class HomeHeaderComponent extends Component {
       this.props.history.push('/login')
     }
 
+    handleLogoOnClick = () => {
+      this.props.history.push('/')
+    }
+
 /*
 
 <Link activeClass="active" className="test1" to="second-component" spy={true} smooth={true} duration={500} style={styles.linkStyle}>PRODUCTS</Link>
@@ -98,7 +102,7 @@ export default class HomeHeaderComponent extends Component {
             <div>
                 <div className="header-animation" style={{height, minWidth:'700px', width:'100%', backgroundColor:'rgba(211,211,211,' + opacity + ')', position:'fixed', top:0,left:0,zIndex:999}}>
                   <div style={{width:'10%', height:'100%', position:'absolute', top:0, left:'10%'}}>
-                    <img className="header-logo" src={logo} alt={"logo"} style={{top:logoMarginTop}}/>
+                    <img className="header-logo" src={logo} alt={"logo"} style={{top:logoMarginTop, cursor:'pointer'}} onClick={this.handleLogoOnClick}/>
                   </div>
                   <div style={{width:'70%', height:'100%', position:'absolute', top:0, right:'10%'}}>
                     <div className="header-animation"  style={{height:'auto', width:'auto', marginTop:buttonMarginTop, position:'absolute', right:0}}>
@@ -124,16 +128,6 @@ export default class HomeHeaderComponent extends Component {
                     </div>
                   </div>
                 </div>
-                {this.state.showImageBackground &&
-                  <div className="header-animation" style={{position:'fixed',top:0,left:0,width:'100%',height:'100vh'}}>
-                    <div id="top-home-left" style={{position:'absolute',top:0,left:0,width:'100vw',height:'100%',backgroundColor:'#373536'}}>
-                      <div style={styles.headerStyle}>
-                        <div style={styles.headerTextStyle}>Something Awesome Is Coming...</div>
-                      </div>
-                      <img src={background} alt={"logo"} style={{opacity:'0.4', minHeight:'100vh', minWidth:'900px', maxWidth:'100%', position:'absolute', width:'auto', minWidth:'700px', top:0,left:0}}/>
-                    </div>
-                  </div>
-                }
             </div>
 
         );

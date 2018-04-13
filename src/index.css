@@ -66,6 +66,18 @@ optionButtonText: {
   cursor:'pointer'
 }*/
 
+.fill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+.fill img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+
 .shadow {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -76,8 +88,52 @@ optionButtonText: {
   box-shadow: 0 20px 40px 0 rgba(60, 60, 60, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
 }
 
+.invitation-text-box {
+  height:55px;
+  width:50px;
+
+  margin-right:5px;
+  margin-left:5px;
+
+  text-align: center;
+  text-transform:uppercase;
+
+  font-size: 28px;
+  font-weight: bold;
+  font-family:'Nunito Sans', sans-serif;
+  color:#635F61;
+
+  border-width: 2px;
+  border-style: solid;
+  border-color: #FFAD0A;
+  border-radius:2px;
+
+  background-color:#DCDCDC;
+
+
+
+}
+
 .header-animation {
   -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.account-animation {
+  -webkit-transition: all 0.3s;
+  transition: all 0.7s;
+  transition-delay: 0.5s;
+}
+
+.card-height-animation {
+  -webkit-transition: height 0.3s;
+  transition: height 0.7s;
+}
+
+.text-button:hover {
+  background-color: #FFBF3E;
+  border-radius:2px;
+  cursor:pointer;
   transition: all 0.3s;
 }
 
@@ -147,4 +203,13 @@ optionButtonText: {
   -o-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+
+.paper-gradient-background {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00c322+75,52d268+100 */
+  background: #00c322; /* Old browsers */
+  background: -moz-linear-gradient(top, #00c322 75%, #52d268 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #00c322 75%,#52d268 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #00c322 75%,#52d268 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c322', endColorstr='#52d268',GradientType=0 ); /* IE6-9 */
 }

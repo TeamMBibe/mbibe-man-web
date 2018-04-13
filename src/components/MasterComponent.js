@@ -5,11 +5,7 @@ import { withRouter, Redirect } from 'react-router'
 import PropTypes from 'prop-types';
 import HomeComponent from './home/HomeComponent'
 import LoginComponent from './accounts/LoginComponent'
-import CreateAccountComponent from './accounts/CreateAccountComponent'
-import CollectBusinessInfoComponent from './accounts/CollectBusinessInfoComponent'
-import CollectPersonalInfoComponent from './accounts/CollectPersonalInfoComponent'
-import InvitationComponent from './accounts/InvitationComponent'
-import VerifyAccountComponent from './accounts/VerifyAccountComponent'
+import RegistrationComponent from './accounts/RegistrationComponent'
 import DashboardComponent from './dashboard/DashboardComponent'
 import GenericNotFound from './util/GenericNotFound'
 import accountManagement from '../management/cognito/AccountManagement'
@@ -23,18 +19,29 @@ const MasterComponent = observer(class MasterComponent extends Component {
     router: PropTypes.object
   };
 
+/*
+
+<Route exact path="/register" render={routeProps => <CreateAccountComponent {...routeProps} />} />
+<Route exact path="/register/personal-info" render={routeProps => <CollectPersonalInfoComponent {...routeProps} />} />
+<Route exact path="/register/invitation" render={routeProps => <InvitationComponent {...routeProps} />} />
+<Route exact path="/register/verify-account" render={routeProps => <VerifyAccountComponent {...routeProps} />} />
+
+*/
+
     render() {
         return (
             <div>
                 <Switch>
                   <Route exact path="/" render={routeProps => <HomeComponent {...routeProps} />} />
-                  <Route exact path="/login" render={routeProps => <LoginComponent {...routeProps} />} />
-                  <Route exact path="/register" render={routeProps => <CreateAccountComponent {...routeProps} />} />
-                  <Route exact path="/register/personal-info" render={routeProps => <CollectPersonalInfoComponent {...routeProps} />} />
-                  <Route exact path="/register/invitation" render={routeProps => <InvitationComponent {...routeProps} />} />
-                  <Route exact path="/register/verify-account" render={routeProps => <VerifyAccountComponent {...routeProps} />} />
                   <Route path="/home" render={routeProps => <HomeComponent {...routeProps} />} />
+
+                  <Route exact path="/login" render={routeProps => <LoginComponent {...routeProps} />} />
+
+                  <Route path="/register" render={routeProps => <RegistrationComponent {...routeProps} />} />
+                  <Route exact path="/invite" render={routeProps => <RegistrationComponent {...routeProps} />} />
+
                   <Route path="/merchant" render={routeProps => <DashboardComponent {...routeProps} />} />
+
                   <Route path="*" render={routeProps => <GenericNotFound {...routeProps} />} />
                 </Switch>
             </div>
