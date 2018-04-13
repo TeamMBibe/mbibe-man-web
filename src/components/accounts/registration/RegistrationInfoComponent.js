@@ -15,7 +15,7 @@ export default class RegistrationInfoComponent extends Component {
     }
 
     componentWillMount() {
-      if(!this.props.location.invite_id || !this.props.location.merchant_uuid) this.props.history.push('/register')
+      //if(!this.props.location.invite_id || !this.props.location.merchant_uuid) this.props.history.push('/register')
     }
 
     render() {
@@ -25,15 +25,17 @@ export default class RegistrationInfoComponent extends Component {
               height="auto">
               <div className="col-md-12" style={{marginTop:20, height:'auto'}}>
                 <div style={styles.textTitleStyle}>Tell Us About You</div>
-                <div style={styles.textQuestionStyle}>What is your first name?</div>
               </div>
-              <div className="col-md-12" style={{marginTop:40, height:'auto', padding:10}}>
-                <div style={{width:'360px', height:'100%', margin:'auto', animationDuration:'0.5s'}}>
-                <TextField
-                  fullWidth={true}
-                  underlineShow={true}
-                  underlineStyle={{borderColor:'#373536'}}
-                />
+              <div className="col-md-12" style={{marginTop:20, marginBottom:60, height:'auto', padding:10}}>
+                <div style={styles.textQuestionStyle}>What is your first name?</div>
+                <div style={{width:'360px', height:'100%', margin:'auto', marginTop:10, animationDuration:'0.5s'}}>
+                  <TextField
+                    fullWidth={true}
+                    underlineShow={true}
+                    underlineStyle={{borderColor:'#373536'}}
+                    style={styles.textFieldTextStyle}
+                    inputStyle={styles.textFieldInputStyle}
+                  />
                 </div>
               </div>
             </CenteredCard>
@@ -80,6 +82,14 @@ const styles = {
     fontFamily:'Raleway, sans-serif',
     textAlign:'center',
     padding:'5px'
+  },
+  textFieldTextStyle : {
+    fontSize:24,
+      textAlign:'center',
+      fontFamily:'Nunito Sans, sans-serif'
+  },
+  textFieldInputStyle : {
+    textAlign:'center'
   },
   circlePaperStyle: {
     height: 150,

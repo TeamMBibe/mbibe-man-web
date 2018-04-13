@@ -104,7 +104,7 @@ export default class RegistrationInviteComponent extends Component {
     renderInputSection = () => {
       if(this.state.validationStep == 'input') {
         return (
-          <div className={this.state.inviteCodeBoxClass} style={{width:'360px', height:'100%', margin:'auto', animationDuration:'0.5s'}}>
+          <div className={this.state.inviteCodeBoxClass} style={{width:'360px', height:'100%', marginLeft:'auto', marginRight:'auto', marginTop:40, animationDuration:'0.5s'}}>
             <input type="text" ref={(input) => { this.input_one = input; }} id="1" class="invitation-text-box" maxlength="1" onChange={(e) => {this.handleInviteCodeChange(e)}} />
             <input type="text" ref={(input) => { this.input_two = input; }} id="2" class="invitation-text-box" maxlength="1" onChange={(e) => {this.handleInviteCodeChange(e)}} />
             <input type="text" ref={(input) => { this.input_three = input; }} id="3" class="invitation-text-box" maxlength="1" onChange={(e) => {this.handleInviteCodeChange(e)}} />
@@ -115,7 +115,7 @@ export default class RegistrationInviteComponent extends Component {
         )
       } else if(this.state.validationStep == 'validating') {
         return (
-          <div style={{width:'50px', height:'50px',}} className="center">
+          <div style={{width:'50px', height:'50px', marginTop:40}} className="center">
             <RefreshIndicator
               size={50}
               left={0}
@@ -153,15 +153,14 @@ export default class RegistrationInviteComponent extends Component {
                 <div style={styles.textTitleStyle}>{title}</div>
                 {this.renderSubtitleText()}
               </div>
-              <div className="col-md-12" style={{marginTop:40, height:'auto', padding:10}}>
+              <div className="col-md-12" style={{marginTop:0, height:'auto', padding:10}}>
                 {this.renderInputSection()}
               </div>
-              <div className="col-md-12" style={{marginTop:40, marginBottom:20, height:'auto'}}>
-               {this.state.validationStep != 'success' &&
-                  <div className="text-button" style={styles.textStyle}>Want an invite?</div>
+                {this.state.validationStep != 'success' &&
+                  <div className="col-md-12" style={{marginTop:40, marginBottom:20, height:'auto'}}>
+                      <div className="text-button" style={styles.textStyle}>Want an invite?</div>
+                  </div>
                 }
-
-              </div>
             </CenteredCard>
           </div>
         );
@@ -187,9 +186,9 @@ const styles = {
   paperDivStyle : {
     fontSize:20,
     width:'100%',
+      marginBottom:20,
     fontFamily:'Raleway, sans-serif',
     textAlign:'center',
-    marginBottom:30,
     height:'auto'
   },
   textSubtitleErrorStyle: {
